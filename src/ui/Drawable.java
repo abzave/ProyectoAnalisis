@@ -16,7 +16,7 @@ public abstract class Drawable {
         height = pHeight;
     }
 
-    public void paint(Graphics g) {
+    public void paint(Graphics2D g) {
 
     }
 }

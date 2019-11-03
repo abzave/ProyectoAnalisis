@@ -22,13 +22,14 @@ public class MainPanel extends JPanel implements IConstants {
     public void paint(Graphics g){
         super.paint(g);
         Color oldColor = g.getColor();
-        g.setColor(THREE_COLOR);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         for (Three three : threes){
-            three.paint(g);
+            three.paint(g2d);
         }
         g.setColor(ANT_COLOR);
         for (Ant ant: ants){
-            ant.paint(g);
+            ant.paint(g2d);
         }
         g.setColor(oldColor);
     }
