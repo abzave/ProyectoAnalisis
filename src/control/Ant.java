@@ -12,7 +12,7 @@ public class Ant extends Drawable {
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paint(Graphics2D g) {
         g.fillOval(x, y, width, height);
     }
 }
