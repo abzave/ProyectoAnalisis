@@ -13,7 +13,7 @@ public interface IConstants {
         Color BUTTON_BACKGROUND = new Color(0x795548);
 
         //Grass constants
-        int GRASS_Y_POS = 600;
+        int GRASS_Y_POS = 800;
     //Threes constants
         //draw control
         double THREE_ROTATION = -90;
