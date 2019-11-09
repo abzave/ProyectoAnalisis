@@ -1,5 +1,6 @@
 package control;
 
+import lib.IConstants;
 import ui.Drawable;
 
 import java.awt.*;
@@ -7,8 +8,9 @@ import java.awt.*;
 public class Ant extends Drawable {
 
 
-    public Ant(int pX, int pY, int pWidth, int pHeight) {
-        super(pX, pY, pWidth, pHeight);
+    public Ant(int pX, int pWidth, int pHeight) {
+        super(pX, pWidth, pHeight);
+        y = IConstants.GRASS_Y_POS -pHeight;
     }
 
     @Override

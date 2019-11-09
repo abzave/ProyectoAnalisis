@@ -9,9 +9,8 @@ public abstract class Drawable {
     protected int width;
     protected int height;
 
-    public Drawable(int pX, int pY, int pWidth, int pHeight){
+    public Drawable(int pX, int pWidth, int pHeight){
         x = pX;
-        y = pY;
         width = pWidth;
         height = pHeight;
     }
