@@ -22,7 +22,6 @@ public class Planner {
             }
             threeOrder.get(three.getX()).add(three);
         }
-
     }
 
 }

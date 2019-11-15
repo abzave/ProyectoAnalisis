@@ -5,13 +5,15 @@ import lib.IConstants;
 
 public class Three extends Positionable {
 
+    private int depth;
     private int leavesCount;
     private double distance;
 
     public Three(int pX, int pDepth) {
         super(pX);
+        depth = pDepth;
         leavesCount = (int)Math.pow(2,pDepth-1);
-        distance = IConstants.ANTHILL_X_POS-x + Calculator.getThreeLenght(pDepth);
+        distance = Calculator.getThreeLenght(pDepth);
     }
 
     public double getDistance() {
@@ -24,5 +26,9 @@ public class Three extends Positionable {
 
     public int getX(){
         return x;
+    }
+
+    public int getDepth() {
+        return depth;
     }
 }
