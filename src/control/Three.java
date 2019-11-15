@@ -21,4 +21,8 @@ public class Three extends Positionable {
     public int getLeavesCount() {
         return leavesCount;
     }
+
+    public int getX(){
+        return x;
+    }
 }
