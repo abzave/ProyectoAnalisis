@@ -1,33 +1,27 @@
 package control;
 
-import ui.Ant;
+import ui.DrawableAnt;
 import ui.DrawableThree;
 
 import java.util.ArrayList;
 
 public class Controller {
 
-    private ArrayList<DrawableThree> threes;
-    private ArrayList<Ant> ants;
+    private ArrayList<DrawableThree> drawableThrees;
+    private ArrayList<DrawableAnt> drawableAnts;
 
     public Controller(){
-        threes = new ArrayList<>();
-        ants = new ArrayList<>();
+        drawableThrees = new ArrayList<>();
+        drawableAnts = new ArrayList<>();
     }
 
-    public ArrayList<DrawableThree> getThrees() {
-        return threes;
+    public ArrayList<DrawableThree> getDrawableThrees() {
+        return drawableThrees;
     }
 
-    public ArrayList<Ant> getAnts() {
-        return ants;
+    public ArrayList<DrawableAnt> getDrawableAnts() {
+        return drawableAnts;
     }
 
-    public void addThree(DrawableThree pThree){
-        threes.add(pThree);
-    }
 
-    public void addAnt(Ant pAnt){
-        ants.add(pAnt);
-    }
 }

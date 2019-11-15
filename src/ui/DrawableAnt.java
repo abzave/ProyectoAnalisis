@@ -5,10 +5,10 @@ import ui.Drawable;
 
 import java.awt.*;
 
-public class Ant extends Drawable {
+public class DrawableAnt extends Drawable {
 
 
-    public Ant(int pX, int pWidth, int pHeight) {
+    public DrawableAnt(int pX, int pWidth, int pHeight) {
         super(pX, pWidth, pHeight);
         y = IConstants.GRASS_Y_POS - pHeight;
     }

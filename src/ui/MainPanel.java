@@ -13,11 +13,11 @@ import java.util.ArrayList;
 public class MainPanel extends JPanel implements IConstants {
 
     private ArrayList<DrawableThree> threes;
-    private ArrayList<Ant> ants;
+    private ArrayList<DrawableAnt> ants;
     private BufferedImage grassImage;
     private BufferedImage groundImage;
 
-    public MainPanel(ArrayList<DrawableThree> pThrees, ArrayList<Ant> pAnts){
+    public MainPanel(ArrayList<DrawableThree> pThrees, ArrayList<DrawableAnt> pAnts){
         threes = pThrees;
         ants = pAnts;
         try {
@@ -49,7 +49,7 @@ public class MainPanel extends JPanel implements IConstants {
             three.paint(g2d);
         }
         g.setColor(ANT_COLOR);
-        for (Ant ant: ants){
+        for (DrawableAnt ant: ants){
             ant.paint(g2d);
         }
         g.setColor(oldColor);
