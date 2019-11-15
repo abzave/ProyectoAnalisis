@@ -31,4 +31,7 @@ public interface IConstants {
 
         //Colors
         Color ANT_COLOR = new Color(0xe53935);
+
+        double NANOSECONDS_TO_SECONDS_FACTOR = 1e+9;
+        double PLANNING_TIME = 0.2;
 }
