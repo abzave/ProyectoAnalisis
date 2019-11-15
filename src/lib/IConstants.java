@@ -21,6 +21,7 @@ public interface IConstants {
         float THREE_STROKE_WIDTH_FACTOR = 1f;
         float THREE_GROWING_FACTOR = 10f;
 
+
         //Colors
         Color THREE_COLOR = new Color(0x795548);
         Color LEAVES_COLOR = new Color(0x388e3c);
@@ -29,7 +30,11 @@ public interface IConstants {
         //control
         float ANT_MAX_SPEED = 10f;
         long ANTS_LEFT = 10000L;
+        float ANT_SIZE = 0.5f;
 
         //Colors
         Color ANT_COLOR = new Color(0xe53935);
+
+        //Anthill
+        int ANTHILL_X_POS = 1400;
 }
