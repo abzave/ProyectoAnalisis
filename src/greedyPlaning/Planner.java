@@ -15,7 +15,7 @@ public class Planner {
         generateOrder();
     }
 
-    public void generateOrder(){
+    private void generateOrder(){
         for (Three three : threeArray) {
             if(!threeOrder.containsKey(three.getX())){
                 threeOrder.put(three.getX(),new ArrayList<Three>());
