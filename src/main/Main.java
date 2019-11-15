@@ -20,6 +20,6 @@ public class Main {
 
     public static void main(String[] args) {
         Three three = new Three(1300, 3);
-        Planner planner = new Planner(generateRandomThrees(20));
+        Planner planner = new Planner(generateRandomThrees(5));
     }
 }
