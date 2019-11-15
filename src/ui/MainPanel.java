@@ -1,7 +1,5 @@
 package ui;
 
-import control.Ant;
-import control.Three;
 import lib.IConstants;
 
 import javax.imageio.ImageIO;
@@ -14,12 +12,12 @@ import java.util.ArrayList;
 
 public class MainPanel extends JPanel implements IConstants {
 
-    private ArrayList<Three> threes;
+    private ArrayList<DrawableThree> threes;
     private ArrayList<Ant> ants;
     private BufferedImage grassImage;
     private BufferedImage groundImage;
 
-    public MainPanel(ArrayList<Three> pThrees, ArrayList<Ant> pAnts){
+    public MainPanel(ArrayList<DrawableThree> pThrees, ArrayList<Ant> pAnts){
         threes = pThrees;
         ants = pAnts;
         try {
@@ -47,7 +45,7 @@ public class MainPanel extends JPanel implements IConstants {
             }
         }
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        for (Three three : threes){
+        for (DrawableThree three : threes){
             three.paint(g2d);
         }
         g.setColor(ANT_COLOR);
