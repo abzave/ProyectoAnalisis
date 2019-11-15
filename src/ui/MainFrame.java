@@ -18,7 +18,7 @@ public class MainFrame extends JFrame implements IConstants {
         setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         controller = pController;
-        mainPanel = new MainPanel(controller.getThrees(), controller.getAnts());
+        mainPanel = new MainPanel(controller.getDrawableThrees(), controller.getDrawableAnts());
         setContentPane(mainPanel);
         setLayout(null);
         setVisible(true);
