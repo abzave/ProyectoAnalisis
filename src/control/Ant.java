@@ -1,20 +1,8 @@
 package control;
 
-import lib.IConstants;
-import ui.Drawable;
+public class Ant extends Positionable {
 
-import java.awt.*;
-
-public class Ant extends Drawable {
-
-
-    public Ant(int pX, int pWidth, int pHeight) {
-        super(pX, pWidth, pHeight);
-        y = IConstants.GRASS_Y_POS -pHeight;
-    }
-
-    @Override
-    public void paint(Graphics2D g) {
-        g.fillOval(x, y, width, height);
+    public Ant(int pX, int pY) {
+        super(pX, pY);
     }
 }

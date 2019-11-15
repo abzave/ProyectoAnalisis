@@ -1,10 +1,13 @@
 package control;
 
+import ui.Ant;
+import ui.DrawableThree;
+
 import java.util.ArrayList;
 
 public class Controller {
 
-    private ArrayList<Three> threes;
+    private ArrayList<DrawableThree> threes;
     private ArrayList<Ant> ants;
 
     public Controller(){
@@ -12,7 +15,7 @@ public class Controller {
         ants = new ArrayList<>();
     }
 
-    public ArrayList<Three> getThrees() {
+    public ArrayList<DrawableThree> getThrees() {
         return threes;
     }
 
@@ -20,7 +23,7 @@ public class Controller {
         return ants;
     }
 
-    public void addThree(Three pThree){
+    public void addThree(DrawableThree pThree){
         threes.add(pThree);
     }
 
