@@ -3,6 +3,7 @@ package main;
 
 import control.Three;
 import greedyPlaning.Planner;
+import greedyPlaning.ThreeSet;
 import lib.IConstants;
 import util.Randoms;
 
@@ -20,6 +21,7 @@ public class Main {
 
     public static void main(String[] args) {
         Three three = new Three(1300, 3);
-        Planner planner = new Planner(generateRandomThrees(5));
+        Planner planner = new Planner(generateRandomThrees(2000));
+        planner.printOptimalSets();
     }
 }
