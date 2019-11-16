@@ -12,7 +12,7 @@ public class Planner {
     private HashMap<Integer, ThreesAtSameX> threesAtSameX = new HashMap<>();
     private ArrayList<Integer> positions;
     private ArrayList<Three> threeArray;
-    private ArrayList<ThreeSet> optimalSets;
+    private ArrayList<OptimalThreeSet> optimalSets;
 
     public Planner(ArrayList<Three> pThreeList){
         threeArray = pThreeList;
@@ -21,6 +21,7 @@ public class Planner {
         joinThreesAtSameXPos();
         sortThrees();
         defineOptimalSets();
+        scoreOptimalSets(); // new //
     }
 
     private void joinThreesAtSameXPos(){
@@ -42,7 +43,7 @@ public class Planner {
     }
 
     private double getThreesMaxHeightAt(int index){
-        return getThreesAt(index).getThrees().get(0).getHeight();
+        return (getThreesAt(index).getThrees().get(0).getHeight());
     }
 
     private double getThreesMinHeightAt(int index){
@@ -61,14 +62,14 @@ public class Planner {
     private void defineOptimalSets(){
         int positionsLenght = positions.size();
         for(int subThrees = 0; subThrees < positionsLenght; subThrees++){
-            ThreeSet actualSet = new ThreeSet(getThreesAt(subThrees));
+            OptimalThreeSet actualSet = new OptimalThreeSet(getThreesAt(subThrees));
             optimalSets.add(actualSet);
             int previousOptimalSubThrees = subThrees;
             double previousOptimalHeight = getThreesMaxHeightAt(previousOptimalSubThrees);
             for(int nextSubThrees = subThrees+1; nextSubThrees < positionsLenght; nextSubThrees++){
                 int distanceBetweenThrees = getDistanceBetweenThrees(previousOptimalSubThrees, nextSubThrees);
                 double nextSubThreesHeight = getThreesMinHeightAt(nextSubThrees);
-                if(previousOptimalHeight < 2*(distanceBetweenThrees+nextSubThreesHeight)){
+                if( previousOptimalHeight < (distanceBetweenThrees+nextSubThreesHeight)){
                     actualSet.add(getThreesAt(nextSubThrees));
                     previousOptimalSubThrees = nextSubThrees;
                     previousOptimalHeight = getThreesMaxHeightAt(nextSubThrees);
@@ -77,9 +78,15 @@ public class Planner {
         }
     }
 
+    private void scoreOptimalSets(){
+        for (OptimalThreeSet threeSet: optimalSets){
+            threeSet.scoreAsig();
+        }
+    }
 
     public void printOptimalSets(){
-        for (ThreeSet threeSet : optimalSets) {
+        for (OptimalThreeSet threeSet : optimalSets) {
+            System.out.println("Score: "+ threeSet.score);
             System.out.println(threeSet);
         }
     }
