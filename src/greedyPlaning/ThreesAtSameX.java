@@ -8,13 +8,12 @@ public class ThreesAtSameX {
 
     private ArrayList<Three> threes;
 
-    public ThreesAtSameX(){
-        threes = new ArrayList<>();
-    }
+    public ThreesAtSameX(){ threes = new ArrayList<>(); }
 
     public ArrayList<Three> getThrees() {
         return threes;
     }
+
 
 
     @Override

@@ -3,8 +3,6 @@ package main;
 
 import control.Three;
 import greedyPlaning.Planner;
-import greedyPlaning.ThreeSet;
-import lib.IConstants;
 import util.Randoms;
 
 import java.util.ArrayList;
@@ -20,7 +18,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Planner planner = new Planner(generateRandomThrees(50));
+        Planner planner = new Planner(generateRandomThrees(20));
         planner.printOptimalSets();
     }
 }
