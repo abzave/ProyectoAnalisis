@@ -7,17 +7,17 @@ public class Three extends Positionable {
 
     private int depth;
     private int leavesCount;
-    private double distance;
+    private double heigh;
 
     public Three(int pX, int pDepth) {
         super(pX);
         depth = pDepth;
         leavesCount = (int)Math.pow(2,pDepth-1);
-        distance = Calculator.getThreeLenght(pDepth);
+        heigh = Calculator.getThreeLenght(pDepth);
     }
 
-    public double getDistance() {
-        return distance;
+    public double getheigh() {
+        return heigh;
     }
 
     public int getLeavesCount() {
