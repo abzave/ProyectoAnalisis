@@ -35,6 +35,4 @@ public interface IConstants {
         //Colors
         Color ANT_COLOR = new Color(0xe53935);
 
-        //Anthill
-        int ANTHILL_X_POS = 1400;
 }
