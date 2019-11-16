@@ -1,7 +1,7 @@
 package greedyPlaning;
 
 import control.Three;
-import util.DescendantSort;
+import util.AscendantSort;
 import util.SortByDepth;
 
 import java.util.ArrayList;
@@ -9,44 +9,78 @@ import java.util.HashMap;
 
 public class Planner {
 
-    private HashMap<Integer, ArrayList<Three>> threeOrder = new HashMap<>();
+    private HashMap<Integer, ThreesAtSameX> threesAtSameX = new HashMap<>();
     private ArrayList<Integer> positions;
     private ArrayList<Three> threeArray;
-    private ThreeSet optimalSets;
+    private ArrayList<ThreeSet> optimalSets;
 
     public Planner(ArrayList<Three> pThreeList){
         threeArray = pThreeList;
         positions = new ArrayList<>();
-        generateOrder();
+        optimalSets = new ArrayList<>();
+        joinThreesAtSameXPos();
         sortThrees();
-        optimalSets = new ThreeSet(threeOrder, positions);
+        defineOptimalSets();
     }
 
-    private void generateOrder(){
+    private void joinThreesAtSameXPos(){
         for (Three three : threeArray) {
-            if(!threeOrder.containsKey(three.getX())){
-                threeOrder.put(three.getX(),new ArrayList<>());
+            if(!threesAtSameX.containsKey(three.getX())){
+                threesAtSameX.put(three.getX(),new ThreesAtSameX());
                 positions.add(three.getX());
             }
-            threeOrder.get(three.getX()).add(three);
+            threesAtSameX.get(three.getX()).getThrees().add(three);
         }
     }
 
     private void sortThrees(){
-        positions.sort(new DescendantSort());
+        positions.sort(new AscendantSort());
         SortByDepth sortByDepth = new SortByDepth();
         for(Integer position: positions){
-            threeOrder.get(position).sort(sortByDepth);
+            threesAtSameX.get(position).getThrees().sort(sortByDepth);
         }
     }
 
-    public void printOptimalSets(){
-        for(int set = 0; set < optimalSets.sets.size(); set++){
-            System.out.println("Set number --> "+ set);
-            for(int element = 0; element < optimalSets.sets.get(set).size(); element++){
-                System.out.println("Three "+element+" is in "+ optimalSets.sets.get(set).get(element).getX() +
-                        "Alto: " + optimalSets.sets.get(set).get(element).getheigh());
+    private double getThreesMaxHeightAt(int index){
+        return getThreesAt(index).getThrees().get(0).getHeight();
+    }
+
+    private double getThreesMinHeightAt(int index){
+        ArrayList<Three> threes = getThreesAt(index).getThrees();
+        return threes.get(threes.size()-1).getHeight();
+    }
+
+    private int getDistanceBetweenThrees(int index1, int index2){
+        return positions.get(index2) - positions.get(index1);
+    }
+
+    private ThreesAtSameX getThreesAt(int index){
+        return threesAtSameX.get(positions.get(index));
+    }
+
+    private void defineOptimalSets(){
+        int positionsLenght = positions.size();
+        for(int subThrees = 0; subThrees < positionsLenght; subThrees++){
+            ThreeSet actualSet = new ThreeSet(getThreesAt(subThrees));
+            optimalSets.add(actualSet);
+            int previousOptimalSubThrees = subThrees;
+            double previousOptimalHeight = getThreesMaxHeightAt(previousOptimalSubThrees);
+            for(int nextSubThrees = subThrees+1; nextSubThrees < positionsLenght; nextSubThrees++){
+                int distanceBetweenThrees = getDistanceBetweenThrees(previousOptimalSubThrees, nextSubThrees);
+                double nextSubThreesHeight = getThreesMinHeightAt(nextSubThrees);
+                if(previousOptimalHeight < 2*(distanceBetweenThrees+nextSubThreesHeight)){
+                    actualSet.add(getThreesAt(nextSubThrees));
+                    previousOptimalSubThrees = nextSubThrees;
+                    previousOptimalHeight = getThreesMaxHeightAt(nextSubThrees);
+                }
             }
+        }
+    }
+
+
+    public void printOptimalSets(){
+        for (ThreeSet threeSet : optimalSets) {
+            System.out.println(threeSet);
         }
     }
 
