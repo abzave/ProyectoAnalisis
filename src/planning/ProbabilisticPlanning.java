@@ -1,9 +1,14 @@
 package planning;
 
+import control.Ant;
+import javafx.collections.transformation.SortedList;
 import lib.IConstants;
 
+import java.time.temporal.ValueRange;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
+import java.util.TreeSet;
 
 public class ProbabilisticPlanning {
 
@@ -53,24 +58,43 @@ public class ProbabilisticPlanning {
         leafsAmount.set(pTree, currentLeafs - pAmount);
     }
 
-    public void plan(double time){
+    public ArrayList<AntPack> plan(double time){
+        ArrayList<AntPack> antPacks = new ArrayList<>();
+        TreeSet<AntPack> reuseQueue = new TreeSet<>();
         double planningTime = time * IConstants.PLANNING_TIME;
         double totalTime = 0;
+        int currentTimeUnit = 0;
+        int ants;
+        AntPack pack;
         while (time > 0 && planningTime > totalTime){
             long startMoment = System.nanoTime();
             int tree = selectTree();
-            int ants = getAntsToSend(tree);
-            if (ants * 0.001 > time){
-                ants = (int)(time * 1000);
-                time = 0;
+            if (reuseQueue.size() > 0 && reuseQueue.first().getLastArriveTime() <= currentTimeUnit){
+                pack = reuseQueue.first();
+                System.out.println(antPacks.indexOf(pack));
+                System.out.println(pack.getLastArriveTime() + " - " + currentTimeUnit);
+                ants = pack.getAmount();
+                pack.reuse(currentTimeUnit, tree, distances.get(tree));
+                reuseQueue.remove(pack);
+            }else {
+                ants = getAntsToSend(tree);
+                if (ants * IConstants.ANT_MAX_SPEED > time) {
+                    ants = (int) (time * 1000);
+                    time = 0;
+                }
+                pack = new AntPack(ants, currentTimeUnit, tree, distances.get(tree));
+                antPacks.add(pack);
             }
+            reuseQueue.add(pack);
+            currentTimeUnit += ants;
+            time -= ants * (double)IConstants.ANT_MAX_SPEED;
             reduceLeafs(tree, ants);
             calculateProbabilities();
-            time -= (ants * 0.001);
             double elapsedTime = (System.nanoTime() - startMoment) / IConstants.NANOSECONDS_TO_SECONDS_FACTOR;
             time -= elapsedTime;
             totalTime += elapsedTime;
         }
+        return antPacks;
     }
 
 }

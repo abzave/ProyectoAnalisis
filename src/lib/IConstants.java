@@ -27,7 +27,7 @@ public interface IConstants {
 
     //Ants constants
         //control
-        float ANT_MAX_SPEED = 10f;
+        float ANT_MAX_SPEED = 0.001f;
 
         //Colors
         Color ANT_COLOR = new Color(0xe53935);
