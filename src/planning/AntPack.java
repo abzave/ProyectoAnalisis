@@ -38,7 +38,11 @@ public class AntPack implements Comparable{
         startTimes.add(pStartTime);
         trees.add(pTree);
         distances.add(pDistance);
-        arriveUnits.add(pStartTime + (int)(pDistance / IConstants.ANT_MAX_SPEED) * amount);
+        arriveUnits.add(pStartTime + calculateRoadTime(pDistance));
+    }
+
+    public int calculateRoadTime(int pDistance){
+        return (int)(pDistance / IConstants.ANT_MAX_SPEED) * amount;
     }
 
     @Override
