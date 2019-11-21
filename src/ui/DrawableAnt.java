@@ -17,4 +17,8 @@ public class DrawableAnt extends Drawable {
     public void paint(Graphics2D g) {
         g.fillOval(x, y, width, height);
     }
+
+    public void move(){
+        x -= IConstants.ANT_MAX_SPEED;
+    }
 }

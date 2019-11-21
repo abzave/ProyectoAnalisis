@@ -1,15 +1,9 @@
 package planning;
 
-import control.Ant;
 import control.Result;
 import control.Three;
-import javafx.collections.transformation.SortedList;
 import lib.IConstants;
-
-import javax.swing.*;
-import java.time.temporal.ValueRange;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 import java.util.TreeSet;
 

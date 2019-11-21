@@ -8,7 +8,7 @@ public abstract class ThreePiece {
     private int x2;
     private int y1;
     private int y2;
-    private BasicStroke stroke;
+    protected BasicStroke stroke;
 
     public ThreePiece(int x1, int x2, int y1, int y2, BasicStroke stroke) {
         this.x1 = x1;
