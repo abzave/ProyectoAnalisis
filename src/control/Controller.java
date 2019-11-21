@@ -24,7 +24,7 @@ public class Controller extends Thread{
         drawableThrees = new ArrayList<>();
         drawableAnts = new ArrayList<>();
         results = pResults;
-        total = results.size()*IConstants.RESULT_PERCENTAGE_EXTRACTION/100;
+        total = Math.max(results.size()*IConstants.RESULT_PERCENTAGE_EXTRACTION/100, 1);
         Collections.shuffle(results);
         for(int resultIndex = 0; resultIndex < total; resultIndex++) {
             Result result = results.get(resultIndex);
@@ -60,20 +60,27 @@ public class Controller extends Thread{
         mainFrame.setLeafs(leafs);
         mainFrame.setPending(leafs);
         mainFrame.setBrought(recollected);
-        for(int tree = 0; tree < results.size(); tree++){
-            drawableThrees.add(new DrawableThree(results.get(tree).getThree()));
-        }
+        mainFrame.setPercentageLeafsLabel(leafs, recollected);
+        int initialTime = totalTime;
         for(int resultIndex = 0; resultIndex < total; resultIndex++){
-            Result result = results.get(resultIndex);
-            double endTime = (2*(result.getThree().getX()+result.getThree().getDepth())+IConstants.ANT_SIZE*result.getTotalAnts())/IConstants.ANT_MAX_SPEED;
+            double endTime = initialTime / total;
             try {
-                mainFrame.repaint();
-                for(DrawableAnt ant : drawableAnts){
-                    ant.move();
-                }
-                drawableAnts.add(new DrawableAnt(IConstants.ANTTHILL, IConstants.ANT_WIDTH, IConstants.ANT_WIDTH));
+                drawableThrees.add(new DrawableThree(results.get(resultIndex).getThree()));
+                drawableAnts.add(new DrawableAnt(IConstants.ANTTHILL, IConstants.ANT_WIDTH, IConstants.ANT_WIDTH, drawableThrees.get(resultIndex)));
                 for(int second = 0; second < endTime; second++){
                     Thread.sleep(10);
+                    for(DrawableAnt ant : drawableAnts){
+                        ant.move();
+                        if(!ant.getGoing() && !ant.isReduced()){
+                            ant.setReduced(true);
+                            drawableThrees.get(resultIndex).reduceLeafs(results.get(resultIndex).getTotalAnts());
+                            recollected += results.get(resultIndex).getTotalAnts();
+                            mainFrame.setBrought(recollected);
+                            mainFrame.setPending(leafs - recollected);
+                            mainFrame.setPercentageLeafsLabel(leafs, recollected);
+                        }
+                        mainFrame.repaint();
+                    }
                     mainFrame.setTime(totalTime--);
                     if(totalTime < 1){
                         break;

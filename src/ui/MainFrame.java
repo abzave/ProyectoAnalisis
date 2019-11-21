@@ -14,6 +14,7 @@ public class MainFrame extends JFrame implements IConstants {
     private JLabel leafLabel;
     private JLabel pendingLeafLabel;
     private JLabel broughtLeafsLabel;
+    private JLabel percentageLeafsLabel;
 
     public MainFrame(Controller pController){
         super(WINDOW_TITLE);
@@ -47,6 +48,10 @@ public class MainFrame extends JFrame implements IConstants {
         broughtLeafsLabel.setText("Traidas: " + brought);
     }
 
+    public void setPercentageLeafsLabel(int total, int brought){
+        percentageLeafsLabel.setText("Porcentaje: " + (brought / (double)total * 100));
+    }
+
     private void initComponents(){
         JButton reignButton = new JButton("Reign");
         Insets insets = getInsets();
@@ -67,10 +72,14 @@ public class MainFrame extends JFrame implements IConstants {
         broughtLeafsLabel = new JLabel();
         broughtLeafsLabel.setFont(new Font("Arial", Font.PLAIN, 25));
         broughtLeafsLabel.setBounds(getWidth()-225-insets.right*2, 90, 225, 50);
+        percentageLeafsLabel = new JLabel();
+        percentageLeafsLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        percentageLeafsLabel.setBounds(getWidth()-225-insets.right*2, 120, 225, 50);
         add(timeLabel);
         add(leafLabel);
         add(pendingLeafLabel);
         add(broughtLeafsLabel);
+        add(percentageLeafsLabel);
         setVisible(true);
     }
 

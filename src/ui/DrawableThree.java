@@ -5,6 +5,7 @@ import lib.IConstants;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class DrawableThree extends Drawable {
 
@@ -39,9 +40,30 @@ public class DrawableThree extends Drawable {
         for (Branch branch : branches){
             branch.paint(g);
         }
-        g.setColor(IConstants.LEAVES_COLOR);
         for (Leaf leaf : leaves){
+            if (!leaf.isRecollected()) {
+                g.setColor(IConstants.LEAVES_COLOR);
+            }else{
+                g.setColor(IConstants.TRANSPARENT);
+            }
             leaf.paint(g);
+        }
+    }
+
+    public int getX(){
+        return x;
+    }
+
+    public void reduceLeafs(int leafs){
+        Collections.shuffle(leaves);
+        int leaf = 0;
+        while (leafs > 0){
+            Leaf drawLeaf = leaves.get(leaf);
+            if (!drawLeaf.isRecollected()) {
+                drawLeaf.recollect();
+                leafs--;
+                leaf++;
+            }
         }
     }
 }
