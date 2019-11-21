@@ -7,7 +7,7 @@ public class TestGenerator implements ITestConstants {
 	
 	public TestGenerator() {
 		for(int testCount=0; testCount<AMOUNT_OF_TESTS; testCount++) {
-			tests[testCount] = new ArrayList<TestTree>();
+			tests[testCount] = new ArrayList<>();
 		}
 		
 		generateTests();
@@ -25,7 +25,7 @@ public class TestGenerator implements ITestConstants {
 
 					int levels = TEST_RULES[testCount][ruleIndex][TestRanges.MIN_LEVELS.getIndex()]+
 							(int)(Math.random()*(TEST_RULES[testCount][ruleIndex][TestRanges.MAX_LEVELS.getIndex()]-TEST_RULES[testCount][ruleIndex][TestRanges.MIN_LEVELS.getIndex()]));
-					
+
 					TestTree test = new TestTree(posX, length, levels);
 					tests[testCount].add(test);
 					

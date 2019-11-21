@@ -24,7 +24,7 @@ public class DrawableThree extends Drawable {
         int x2 = x1 + (int) (Math.cos(Math.toRadians(angle)) * depth * IConstants.THREE_GROWING_FACTOR);
         int y2 = y1 + (int) (Math.sin(Math.toRadians(angle)) * depth * IConstants.THREE_GROWING_FACTOR);
         if(depth == 1){
-            leaves.add(new Leaf(x1, x2, y1, y2, new BasicStroke(IConstants.THREE_STROKE_WIDTH_FACTOR * depth)));
+            leaves.add(new Leaf(x1, x2, y1, y2, new BasicStroke(IConstants.THREE_STROKE_WIDTH_FACTOR * depth*2)));
         }else {
             branches.add(new Branch(x1, x2, y1, y2, new BasicStroke(IConstants.THREE_STROKE_WIDTH_FACTOR * depth)));
         }

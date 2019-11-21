@@ -6,14 +6,14 @@ public interface IConstants {
     //UI Constants
         //Window constants
         String WINDOW_TITLE = "Reina de la noche";
-        int WINDOW_WIDTH = 1600;
-        int WINDOW_HEIGHT = 1000;
+        int WINDOW_WIDTH = 1280;
+        int WINDOW_HEIGHT = 720;
 
         //Buttons constants
         Color BUTTON_BACKGROUND = new Color(0x795548);
 
         //Grass constants
-        int GRASS_Y_POS = 800;
+        int GRASS_Y_POS = 600;
     //Threes constants
         //draw control
         double THREE_ROTATION = -90;
@@ -32,4 +32,6 @@ public interface IConstants {
 
         //Colors
         Color ANT_COLOR = new Color(0xe53935);
+
+        double TREE_PERCENTAGE = 0.05;
 }
