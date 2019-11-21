@@ -56,7 +56,10 @@ public class Controller extends Thread{
 
     @Override
     public void run(){
+        int recolected = 0;
         mainFrame.setLeafs(leafs);
+        mainFrame.setPending(leafs);
+        mainFrame.setBrought(recolected);
         for(int resultIndex = 0; resultIndex < total; resultIndex++){
             Result result = results.get(resultIndex);
             double endTime = (2*(result.getThree().getX()+result.getThree().getDepth())+IConstants.ANT_SIZE*result.getTotalAnts())/IConstants.ANT_MAX_SPEED;

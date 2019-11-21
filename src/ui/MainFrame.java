@@ -12,6 +12,8 @@ public class MainFrame extends JFrame implements IConstants {
     private Controller controller;
     private JLabel timeLabel;
     private JLabel leafLabel;
+    private JLabel pendingLeafLabel;
+    private JLabel broughtLeafsLabel;
 
     public MainFrame(Controller pController){
         super(WINDOW_TITLE);
@@ -30,11 +32,19 @@ public class MainFrame extends JFrame implements IConstants {
     }
 
     public void setTime(int time){
-        timeLabel.setText(String.valueOf(time));
+        timeLabel.setText("Tiempo: " + time);
     }
 
     public void setLeafs(int leafs){
         leafLabel.setText("Hojas totales: " + leafs);
+    }
+
+    public void setPending(int pending){
+        pendingLeafLabel.setText("Pendientes: " + pending);
+    }
+
+    public void setBrought(int brought){
+        broughtLeafsLabel.setText("Traidas: " + brought);
     }
 
     private void initComponents(){
@@ -47,12 +57,20 @@ public class MainFrame extends JFrame implements IConstants {
         add(reignButton);
         timeLabel = new JLabel();
         timeLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-        timeLabel.setBounds(getWidth()-80-insets.right*2,0, 100, 50);
+        timeLabel.setBounds(getWidth()-225-insets.right*2,0, 225, 50);
         leafLabel = new JLabel();
         leafLabel.setFont(new Font("Arial", Font.PLAIN, 25));
         leafLabel.setBounds(getWidth()-225-insets.right*2, 30, 225, 50);
+        pendingLeafLabel = new JLabel();
+        pendingLeafLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        pendingLeafLabel.setBounds(getWidth()-225-insets.right*2, 60, 225, 50);
+        broughtLeafsLabel = new JLabel();
+        broughtLeafsLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        broughtLeafsLabel.setBounds(getWidth()-225-insets.right*2, 90, 225, 50);
         add(timeLabel);
         add(leafLabel);
+        add(pendingLeafLabel);
+        add(broughtLeafsLabel);
         setVisible(true);
     }
 
