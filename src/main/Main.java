@@ -34,7 +34,7 @@ public class Main {
 
     private static ArrayList<Result> probabilisticPlanningR(ArrayList<Three> pThreeList){
         ProbabilisticPlanning probabilisticPlan = new ProbabilisticPlanning(pThreeList);
-        ArrayList<AntPack> packs = probabilisticPlan.plan((double)IConstants.TOTAL_TIME);
+        ArrayList<AntPack> packs = probabilisticPlan.plan();
         ArrayList<Result> results = probabilisticPlan.getResultsFromAntPacks(packs);
         return results;
     }
