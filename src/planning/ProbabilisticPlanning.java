@@ -73,7 +73,7 @@ public class ProbabilisticPlanning {
      * @return an amount of ants.
      */
     private int getAntsToSend(int tree){
-        return (int)(leafsAmount.get(tree) * Math.max(probabilities.get(tree), IConstants.PERCENTAGE_OF_LEAVES));
+        return (int)Math.ceil(leafsAmount.get(tree) * Math.max(probabilities.get(tree), IConstants.PERCENTAGE_OF_LEAVES));
     }
 
     /**
@@ -117,7 +117,6 @@ public class ProbabilisticPlanning {
                 reuseQueue.add(pack);
             }
             time -= ants / IConstants.ANT_MAX_SPEED;
-            System.out.println(time);
             reduceLeafs(tree, ants);
             calculateProbabilities();
         }
