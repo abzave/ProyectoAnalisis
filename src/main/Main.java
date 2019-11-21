@@ -1,15 +1,10 @@
 package main;
 
-import common.TestGenerator;
-import common.TestTree;
 import control.Controller;
 import control.Result;
 import greedyPlaning.Planner;
-import lib.IConstants;
 import planning.*;
-import ui.DrawableThree;
 import ui.MainFrame;
-import ui.TreeScale;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -23,7 +18,7 @@ public class Main {
     private static ArrayList<Three> generateRandomThrees(int pAmountThree){
         ArrayList<Three> threes = new ArrayList<>();
         for(int three = 0; three < pAmountThree; three++){
-            threes.add(new Three(Randoms.randInt(0, 500), Randoms.randInt(2, 8)));
+            threes.add(new Three(Randoms.randInt(25, 500), Randoms.randInt(2, 8)));
         }
         return threes;
     }

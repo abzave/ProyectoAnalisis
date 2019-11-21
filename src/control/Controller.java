@@ -56,25 +56,30 @@ public class Controller extends Thread{
 
     @Override
     public void run(){
-        int recolected = 0;
+        int recollected = 0;
         mainFrame.setLeafs(leafs);
         mainFrame.setPending(leafs);
-        mainFrame.setBrought(recolected);
+        mainFrame.setBrought(recollected);
+        for(int tree = 0; tree < results.size(); tree++){
+            drawableThrees.add(new DrawableThree(results.get(tree).getThree()));
+        }
         for(int resultIndex = 0; resultIndex < total; resultIndex++){
             Result result = results.get(resultIndex);
             double endTime = (2*(result.getThree().getX()+result.getThree().getDepth())+IConstants.ANT_SIZE*result.getTotalAnts())/IConstants.ANT_MAX_SPEED;
             try {
                 mainFrame.repaint();
-                drawableThrees.add(new DrawableThree(result.getThree()));
+                for(DrawableAnt ant : drawableAnts){
+                    ant.move();
+                }
+                drawableAnts.add(new DrawableAnt(IConstants.ANTTHILL, IConstants.ANT_WIDTH, IConstants.ANT_WIDTH));
                 for(int second = 0; second < endTime; second++){
-                    Thread.sleep(5);
+                    Thread.sleep(10);
                     mainFrame.setTime(totalTime--);
                     if(totalTime < 1){
                         break;
                     }
                 }
             } catch (InterruptedException ignored) {}
-            System.out.println("new tree");
         }
         System.out.println("End");
     }

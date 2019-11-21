@@ -25,12 +25,15 @@ public interface IConstants {
         //Colors
         Color THREE_COLOR = new Color(0x795548);
         Color LEAVES_COLOR = new Color(0x388e3c);
+        Color TRANSPARENT = new Color(0f, 0f, 0f, 0f);
 
     //Ants constants
         //control
         float ANT_MAX_SPEED = 10f;
         long ANTS_LEFT = 1000000L;
         float ANT_SIZE = 0.5f;
+        int ANT_WIDTH = 10;
+        int ANTTHILL = 1000;
 
         //Colors
         Color ANT_COLOR = new Color(0xe53935);
