@@ -1,5 +1,7 @@
 package planning;
 
+import control.Result;
+import control.Three;
 import lib.IConstants;
 
 import javax.swing.*;
@@ -72,5 +74,9 @@ public class AntPack implements Comparable{
     @Override
     public int compareTo(Object o) {
         return getLastArriveTime() - ((AntPack)o).getLastArriveTime();
+    }
+
+    public Result translateToResult(ArrayList<Three> threes){
+        return new Result(threes.get(trees.get(0)), amount, startTimes.get(0));
     }
 }
