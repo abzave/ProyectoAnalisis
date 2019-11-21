@@ -6,8 +6,8 @@ public interface IConstants {
     //UI Constants
         //Window constants
         String WINDOW_TITLE = "Reina de la noche";
-        int WINDOW_WIDTH = 1600;
-        int WINDOW_HEIGHT = 1000;
+        int WINDOW_WIDTH = 1280;
+        int WINDOW_HEIGHT = 720;
 
         //Buttons constants
         Color BUTTON_BACKGROUND = new Color(0x795548);
