@@ -1,0 +1,8 @@
+
+*.xml
+
+*.class
+
+*.iml
+
+out/production/Project/META-INF/Project.kotlin_module
