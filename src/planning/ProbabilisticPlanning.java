@@ -28,7 +28,7 @@ public class ProbabilisticPlanning {
         threes = pThrees;
         for(Three three : threes){
             leafsAmount.add(three.getLeavesCount());
-            distances.add(2 * (int)three.getHeight());
+            distances.add(2 * ((int)three.getHeight() + three.getX()));
         }
         calculateProbabilities();
     }
