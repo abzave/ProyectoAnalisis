@@ -10,6 +10,7 @@ public class MainFrame extends JFrame implements IConstants {
 
     private MainPanel mainPanel;
     private Controller controller;
+    private JLabel timeLabel;
 
     public MainFrame(Controller pController){
         super(WINDOW_TITLE);
@@ -19,10 +20,16 @@ public class MainFrame extends JFrame implements IConstants {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         controller = pController;
         mainPanel = new MainPanel(controller.getDrawableThrees(), controller.getDrawableAnts());
+        controller.setUI(this, mainPanel);
         setContentPane(mainPanel);
         setLayout(null);
         setVisible(true);
         initComponents();
+        controller.start();
+    }
+
+    public void setTime(int time){
+        timeLabel.setText(String.valueOf(time));
     }
 
     private void initComponents(){
@@ -33,7 +40,11 @@ public class MainFrame extends JFrame implements IConstants {
         reignButton.setSelected(false);
         reignButton.setFocusPainted(false);
         add(reignButton);
-        repaint();
+        timeLabel = new JLabel();
+        timeLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        timeLabel.setBounds(getWidth()-80-insets.right*2,0, 100, 50);
+        add(timeLabel);
+        setVisible(true);
     }
 
 }

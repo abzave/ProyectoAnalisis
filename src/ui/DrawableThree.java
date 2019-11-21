@@ -1,5 +1,6 @@
 package ui;
 
+import control.Three;
 import lib.IConstants;
 
 import java.awt.*;
@@ -11,9 +12,9 @@ public class DrawableThree extends Drawable {
     private ArrayList<Branch> branches;
     private ArrayList<Leaf> leaves;
 
-    public DrawableThree(int pX, int pWidth, int pHeight, int pDepth) {
-        super(pX, pWidth, pHeight);
-        depth = pDepth;
+    public DrawableThree(Three pThree) {
+        super(pThree.getX(), 0, 0);
+        depth = pThree.getDepth();
         branches = new ArrayList<>();
         leaves = new ArrayList<>();
         buildThree(x, IConstants.GRASS_Y_POS, IConstants.THREE_ROTATION, depth);

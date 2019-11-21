@@ -25,12 +25,8 @@ public class Main {
         return threes;
     }
 
-    private static void greedyPlanning(){
-        Planner planner = new Planner(generateRandomThrees(200));
-        ArrayList<Result> results = planner.getPlanningResult();
-        for(Result result : results){
-            System.out.println(result.getTotalAnts());
-        }
+    private static ArrayList<Result> greedyPlanning(){
+        return new Planner(generateRandomThrees(1000)).getPlanningResult();
     }
 
     public static void main(String[] args) {
@@ -42,6 +38,6 @@ public class Main {
 //            controller.getDrawableThrees().add(new DrawableThree(tree.getPosX(), 20, tree.getLength(), tree.getLevels()));
 //        }
 //        new MainFrame(controller);
-        greedyPlanning();
+        new MainFrame(new Controller(greedyPlanning()));
     }
 }
