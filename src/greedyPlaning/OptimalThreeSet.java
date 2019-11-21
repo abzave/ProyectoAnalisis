@@ -58,10 +58,10 @@ public class OptimalThreeSet {
     public double timeToRecolect(){
         double time = 0;
         ArrayList<Three> threesAtSameX = set.get(set.size()-1).getThrees();
-        double lastThreeHeigh = threesAtSameX.get(threesAtSameX.size()-1).getHeight();
+        double lastThreeHeight = threesAtSameX.get(threesAtSameX.size()-1).getHeight();
         double lastThreeX = (double)threesAtSameX.get(0).getX();
         double totalAntLenght = (double)ANT_SIZE * (double)countTotalLeaves();
-        time = (lastThreeHeigh + lastThreeX + totalAntLenght)/(double)ANT_MAX_SPEED;
+        time = (lastThreeHeight + lastThreeX + totalAntLenght)/(double)ANT_MAX_SPEED;
         return time;
     }
 

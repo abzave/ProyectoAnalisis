@@ -23,6 +23,10 @@ public class Three extends Positionable {
         return leavesCount;
     }
 
+    public void decreaseLeavesCount(int amount){
+        leavesCount -= amount;
+    }
+
     public int getX(){
         return x;
     }

@@ -28,7 +28,9 @@ public interface IConstants {
 
     //Ants constants
         //control
-        float ANT_MAX_SPEED = 0.001f;
+        float ANT_MAX_SPEED = 1f;
+        long ANTS_LEFT = 100000L;
+        float ANT_SIZE = 0.5f;
 
         //Colors
         Color ANT_COLOR = new Color(0xe53935);
@@ -38,6 +40,6 @@ public interface IConstants {
         double TREE_PERCENTAGE = 0.05;
 
     //Total
-        int TOTAL_TIME = 100;
+        int TOTAL_TIME = 1000;
 
 }
