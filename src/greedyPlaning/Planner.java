@@ -21,7 +21,7 @@ public class Planner {
         joinThreesAtSameXPos();
         sortThrees();
         defineOptimalSets();
-        scoreOptimalSets(); // new //
+
     }
 
     private void joinThreesAtSameXPos(){
@@ -78,15 +78,21 @@ public class Planner {
         }
     }
 
-    private void scoreOptimalSets(){
-        for (OptimalThreeSet threeSet: optimalSets){
-            threeSet.scoreAsig();
+    private OptimalThreeSet getBestOptimal(){
+        int bestIndex = 0;
+        double actualBest = optimalSets.get(0).scoreAsig();
+        for (int actual = 1; actual < optimalSets.size(); actual ++){
+            double actualCompared = optimalSets.get(actual).scoreAsig();
+            if (actualBest < actualCompared){
+                actualBest = actualCompared;
+                bestIndex = actual;
+            }
         }
+        return optimalSets.get(bestIndex);
     }
 
     public void printOptimalSets(){
-        for (OptimalThreeSet threeSet : optimalSets) {
-            System.out.println("Score: "+ threeSet.score);
+        for (OptimalThreeSet threeSet : optimalSets){
             System.out.println(threeSet);
         }
     }

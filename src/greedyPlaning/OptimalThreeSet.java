@@ -1,14 +1,15 @@
 package greedyPlaning;
 
-
 import control.Three;
 
 import java.util.ArrayList;
 
+import static lib.IConstants.ANT_MAX_SPEED;
+import static lib.IConstants.ANT_SIZE;
+
 public class OptimalThreeSet {
 
     public ArrayList<ThreesAtSameX> set;
-    public double score;
 
     public OptimalThreeSet(ThreesAtSameX threesAtSameX){
         set = new ArrayList<>();
@@ -22,8 +23,6 @@ public class OptimalThreeSet {
     public void add(ThreesAtSameX threesAtSameX){
         set.add(threesAtSameX);
     }
-
-    public double getScore(){ return score; }
 
     private int countLeavesPerSameX(int pIndex){
         int total = 0;
@@ -48,13 +47,22 @@ public class OptimalThreeSet {
     }
 
 
-    public void scoreAsig(){
-        if(distLastFirst()!=0){
-            score = (double)countTotalLeaves()/(double)distLastFirst();
+    public double scoreAsig(){
+        if(distLastFirst()==0){
+            return (double)countTotalLeaves()/1;
         }else{
-            score = 0;
+            return (double)countTotalLeaves()/(double)distLastFirst();
         }
+    }
 
+    public double timeToRecolect(){
+        double time = 0;
+        ArrayList<Three> threesAtSameX = set.get(set.size()-1).getThrees();
+        double lastThreeHeigh = threesAtSameX.get(threesAtSameX.size()-1).getHeight();
+        double lastThreeX = (double)threesAtSameX.get(0).getX();
+        double totalAntLenght = (double)ANT_SIZE * (double)countTotalLeaves();
+        time = (lastThreeHeigh + lastThreeX + totalAntLenght)/(double)ANT_MAX_SPEED;
+        return time;
     }
 
     @Override

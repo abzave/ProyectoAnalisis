@@ -35,4 +35,7 @@ public interface IConstants {
         //Colors
         Color ANT_COLOR = new Color(0xe53935);
 
+    //Total
+        int TOTAL_TIME = 100;
+
 }
