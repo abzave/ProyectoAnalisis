@@ -23,7 +23,7 @@ public class Main {
     private static ArrayList<Three> generateRandomThrees(int pAmountThree){
         ArrayList<Three> threes = new ArrayList<>();
         for(int three = 0; three < pAmountThree; three++){
-            threes.add(new Three(Randoms.randInt(0, 20), Randoms.randInt(2, 8)));
+            threes.add(new Three(Randoms.randInt(0, 500), Randoms.randInt(2, 8)));
         }
         return threes;
     }
@@ -78,9 +78,20 @@ public class Main {
         }
     }
 
-
-
-
+    private static ArrayList<Result> compareResults(ArrayList<Result> greedyResult, ArrayList<Result> probabilisticResult){
+        int probabilisticAnts = 0;
+        int greedyAnts = 0;
+        for(Result result : greedyResult){
+            greedyAnts += result.getTotalAnts();
+        }
+        for(Result result : probabilisticResult){
+            probabilisticAnts += result.getTotalAnts();
+        }
+        if (probabilisticAnts < greedyAnts){
+            return greedyResult;
+        }
+        return probabilisticResult;
+    }
 
 
     public static void main(String[] args) {
@@ -96,13 +107,8 @@ public class Main {
         ArrayList<Result> greedyResults = greedyPlanning(threesToPlan);
         ArrayList<Result> probabilisticResults = probabilisticPlanningR(threesToPlan);
         printResults(greedyResults, probabilisticResults);
+        ArrayList<Result> best = compareResults(greedyResults, probabilisticResults);
 
-
-
-        //Hace falta implementar un metodo que compare los dos resultados por cada pack y solo muestre el mejor
-
-
-
-        //new MainFrame(new Controller(greedyResults));
+        new MainFrame(new Controller(best));
     }
 }
