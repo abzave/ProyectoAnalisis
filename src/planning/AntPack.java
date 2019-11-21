@@ -16,7 +16,6 @@ public class AntPack implements Comparable{
     private ArrayList<Integer> startTimes = new ArrayList<>();
     private ArrayList<Integer> arriveUnits = new ArrayList<>();
     private ArrayList<Integer> trees = new ArrayList<>();
-    private ArrayList<Integer> distances = new ArrayList<>();
 
     /**
      * Constructor of the class.
@@ -57,7 +56,6 @@ public class AntPack implements Comparable{
     public void reuse(int pStartTime, int pTree, int pDistance){
         startTimes.add(pStartTime);
         trees.add(pTree);
-        distances.add(pDistance);
         arriveUnits.add(pStartTime + calculateRoadTime(pDistance));
     }
 

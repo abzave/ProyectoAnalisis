@@ -73,7 +73,7 @@ public class ProbabilisticPlanning {
      * @return an amount of ants.
      */
     private int getAntsToSend(int tree){
-        return (int)(leafsAmount.get(tree) * probabilities.get(tree));
+        return (int)(leafsAmount.get(tree) * Math.max(probabilities.get(tree), IConstants.PERCENTAGE_OF_LEAVES));
     }
 
     /**
@@ -106,8 +106,8 @@ public class ProbabilisticPlanning {
             long startMoment = System.nanoTime();
             int tree = selectTree();
             pack = createPack(tree, time, currentTimeUnit);
-            if (reuseQueue.size() > 0 && reuseQueue.first().getLastArriveTime() <= currentTimeUnit && leafsAmount.get(tree) >= reuseQueue.first().getAmount()){
-                ants = reuseQueue.first().getAmount();
+            if (canReuse(reuseQueue, currentTimeUnit) && leafsAmount.get(tree) >= reuseQueue.first().getAmount() && pack != null){
+                ants = pack.getAmount();
                 reuseQueue.remove(pack);
             }else {
                 ants = 0;
@@ -116,8 +116,10 @@ public class ProbabilisticPlanning {
                     antsLeft -= ants;
                 }
             }
-            antPacks.add(pack);
-            reuseQueue.add(pack);
+            if(pack != null) {
+                antPacks.add(pack);
+                reuseQueue.add(pack);
+            }
             currentTimeUnit += ants;
             time -= ants * (double)IConstants.ANT_MAX_SPEED;
             reduceLeafs(tree, ants);
@@ -127,6 +129,10 @@ public class ProbabilisticPlanning {
             totalTime += elapsedTime;
         }
         return antPacks;
+    }
+
+    private boolean canReuse(TreeSet<AntPack> reuseQueue, int currentTimeUnit){
+        return reuseQueue.size() > 0 && reuseQueue.first().getLastArriveTime() <= currentTimeUnit;
     }
 
     public ArrayList<Result> getResultsFromAntPacks(ArrayList<AntPack> packs){
@@ -167,14 +173,10 @@ public class ProbabilisticPlanning {
      */
     private AntPack createPack(int tree, double time, int currentTimeUnit){
         int ants = getAntsToSend(tree);
-        if (ants * IConstants.ANT_MAX_SPEED > time) {
-            ants = (int) (time * 1000);
-            time = 0;
-        }
-        AntPack pack = new AntPack(ants, currentTimeUnit, tree, distances.get(tree));
-        if(pack.calculateRoadTime(distances.get(tree)) * (double)IConstants.ANT_MAX_SPEED > time){
+        if(ants == 0){
             return null;
         }
+        AntPack pack = new AntPack(ants, currentTimeUnit, tree, distances.get(tree));
         return pack;
     }
 

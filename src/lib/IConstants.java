@@ -40,9 +40,11 @@ public interface IConstants {
         double TREE_PERCENTAGE = 0.05;
 
     //Total
-        int TOTAL_TIME = 1000;
+        int TOTAL_TIME = 60;
 
     //Control
         int RESULT_PERCENTAGE_EXTRACTION = 20;
+
+        double PERCENTAGE_OF_LEAVES = 0.1;
 
 }

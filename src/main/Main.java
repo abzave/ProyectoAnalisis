@@ -94,8 +94,7 @@ public class Main {
 //        new MainFrame(controller);
         ArrayList<Three> threesToPlan = generateRandomThrees(500);
         ArrayList<Result> greedyResults = greedyPlanning(threesToPlan);
-        //ArrayList<Result> probabilisticResults = probabilisticPlanningR(threesToPlan);
-        ArrayList<Result> probabilisticResults = new ArrayList<>();
+        ArrayList<Result> probabilisticResults = probabilisticPlanningR(threesToPlan);
         printResults(greedyResults, probabilisticResults);
 
 
