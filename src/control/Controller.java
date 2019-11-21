@@ -18,6 +18,7 @@ public class Controller extends Thread{
     private MainFrame mainFrame;
     private int totalTime;
     private int total;
+    private int leafs;
 
     public Controller(ArrayList<Result> pResults){
         drawableThrees = new ArrayList<>();
@@ -29,8 +30,16 @@ public class Controller extends Thread{
             Result result = results.get(resultIndex);
             totalTime += (2 * (result.getThree().getX() + result.getThree().getDepth()) + IConstants.ANT_SIZE * result.getTotalAnts()) / IConstants.ANT_MAX_SPEED;
         }
+        leafs = countLeafs();
     }
 
+    private int countLeafs(){
+        int leafs = 0;
+        for(Result result : results){
+            leafs += result.getTotalAnts();
+        }
+        return leafs;
+    }
 
     public void setUI(MainFrame pMainFrame, MainPanel pMainPanel){
         mainFrame = pMainFrame;
@@ -47,6 +56,7 @@ public class Controller extends Thread{
 
     @Override
     public void run(){
+        mainFrame.setLeafs(leafs);
         for(int resultIndex = 0; resultIndex < total; resultIndex++){
             Result result = results.get(resultIndex);
             double endTime = (2*(result.getThree().getX()+result.getThree().getDepth())+IConstants.ANT_SIZE*result.getTotalAnts())/IConstants.ANT_MAX_SPEED;

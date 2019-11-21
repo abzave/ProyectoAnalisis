@@ -11,6 +11,7 @@ public class MainFrame extends JFrame implements IConstants {
     private MainPanel mainPanel;
     private Controller controller;
     private JLabel timeLabel;
+    private JLabel leafLabel;
 
     public MainFrame(Controller pController){
         super(WINDOW_TITLE);
@@ -32,6 +33,10 @@ public class MainFrame extends JFrame implements IConstants {
         timeLabel.setText(String.valueOf(time));
     }
 
+    public void setLeafs(int leafs){
+        leafLabel.setText("Hojas totales: " + leafs);
+    }
+
     private void initComponents(){
         JButton reignButton = new JButton("Reign");
         Insets insets = getInsets();
@@ -43,7 +48,11 @@ public class MainFrame extends JFrame implements IConstants {
         timeLabel = new JLabel();
         timeLabel.setFont(new Font("Arial", Font.PLAIN, 25));
         timeLabel.setBounds(getWidth()-80-insets.right*2,0, 100, 50);
+        leafLabel = new JLabel();
+        leafLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        leafLabel.setBounds(getWidth()-225-insets.right*2, 30, 225, 50);
         add(timeLabel);
+        add(leafLabel);
         setVisible(true);
     }
 
