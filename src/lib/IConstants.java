@@ -28,7 +28,7 @@ public interface IConstants {
 
     //Ants constants
         //control
-        float ANT_MAX_SPEED = 0.35f;
+        float ANT_MAX_SPEED = 10f;
         long ANTS_LEFT = 1000000L;
         float ANT_SIZE = 0.5f;
 
@@ -40,9 +40,11 @@ public interface IConstants {
         double TREE_PERCENTAGE = 0.05;
 
     //Total
-        int TOTAL_TIME = 1000;
+        int TOTAL_TIME = 60;
 
     //Control
         int RESULT_PERCENTAGE_EXTRACTION = 20;
+
+        double PERCENTAGE_OF_LEAVES = 0.1;
 
 }

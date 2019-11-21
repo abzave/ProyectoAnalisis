@@ -23,7 +23,6 @@ public class Planner {
         joinThreesAtSameXPos();
         sortThrees();
         defineOptimalSets();
-
     }
 
     private void joinThreesAtSameXPos(){
