@@ -1,9 +1,12 @@
 package planning;
 
 import control.Ant;
+import control.Result;
+import control.Three;
 import javafx.collections.transformation.SortedList;
 import lib.IConstants;
 
+import javax.swing.*;
 import java.time.temporal.ValueRange;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,23 +19,17 @@ import java.util.TreeSet;
 public class ProbabilisticPlanning {
 
     private ArrayList<Double> probabilities;
-    private ArrayList<Integer> leafsAmount;
-    private ArrayList<Integer> distances;
+    private ArrayList<Integer> leafsAmount = new ArrayList<>();
+    private ArrayList<Integer> distances = new ArrayList<>();
+    private ArrayList<Three> threes;
     private Random random = new Random();
-    private double recollectionPercentage;
 
-    /**
-     * Constructor of the class.
-     *
-     * @param pLeafsAmount leaf quantity of the trees.
-     * @param pDistances   distance of trees from the anthill (hormiguero).
-     * @param pRecollectionPercentage  leaf collection percentage.
-     */
-    public ProbabilisticPlanning(ArrayList<Integer> pLeafsAmount, ArrayList<Integer> pDistances,
-                                 double pRecollectionPercentage){
-        leafsAmount = pLeafsAmount;
-        recollectionPercentage = pRecollectionPercentage;
-        distances = pDistances;
+    public ProbabilisticPlanning(ArrayList<Three> pThrees){
+        threes = pThrees;
+        for(Three three : threes){
+            leafsAmount.add(three.getLeavesCount());
+            distances.add(2 * (int)three.getHeight());
+        }
         calculateProbabilities();
     }
 
@@ -76,7 +73,7 @@ public class ProbabilisticPlanning {
      * @return an amount of ants.
      */
     private int getAntsToSend(int tree){
-        return (int)(leafsAmount.get(tree) * recollectionPercentage);
+        return (int)(leafsAmount.get(tree) * probabilities.get(tree));
     }
 
     /**
@@ -103,22 +100,23 @@ public class ProbabilisticPlanning {
         double totalTime = 0;
         int currentTimeUnit = 0;
         int ants;
+        long antsLeft = IConstants.ANTS_LEFT;
         AntPack pack;
-        while (time > 0 && planningTime > totalTime){
+        while (time > 0 && planningTime > totalTime && antsLeft > 0){
             long startMoment = System.nanoTime();
             int tree = selectTree();
-            if (reuseQueue.size() > 0 && reuseQueue.first().getLastArriveTime() <= currentTimeUnit){
-                pack = reuseQueue.first();
-                ants = reusePack(pack, tree, currentTimeUnit, time);
+            pack = createPack(tree, time, currentTimeUnit);
+            if (reuseQueue.size() > 0 && reuseQueue.first().getLastArriveTime() <= currentTimeUnit && leafsAmount.get(tree) >= reuseQueue.first().getAmount()){
+                ants = reuseQueue.first().getAmount();
                 reuseQueue.remove(pack);
             }else {
                 ants = 0;
-                pack = createPack(tree, time, currentTimeUnit);
                 if (pack != null){
-                    antPacks.add(pack);
                     ants = pack.getAmount();
+                    antsLeft -= ants;
                 }
             }
+            antPacks.add(pack);
             reuseQueue.add(pack);
             currentTimeUnit += ants;
             time -= ants * (double)IConstants.ANT_MAX_SPEED;
@@ -129,6 +127,14 @@ public class ProbabilisticPlanning {
             totalTime += elapsedTime;
         }
         return antPacks;
+    }
+
+    public ArrayList<Result> getResultsFromAntPacks(ArrayList<AntPack> packs){
+        ArrayList<Result> results = new ArrayList<>();
+        for(AntPack pack : packs){
+            results.add(pack.translateToResult(threes));
+        }
+        return results;
     }
 
     /**
