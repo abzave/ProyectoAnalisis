@@ -33,6 +33,7 @@ public class MainFrame extends JFrame implements IConstants {
         reignButton.setSelected(false);
         reignButton.setFocusPainted(false);
         add(reignButton);
+        repaint();
     }
 
 }
