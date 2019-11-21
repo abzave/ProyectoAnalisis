@@ -1,6 +1,8 @@
 package greedyPlaning;
 
+import control.Result;
 import control.Three;
+import lib.IConstants;
 import util.AscendantSort;
 import util.SortByDepth;
 
@@ -95,6 +97,37 @@ public class Planner {
         for (OptimalThreeSet threeSet : optimalSets){
             System.out.println(threeSet);
         }
+    }
+
+    public ArrayList<Result> getPlanningResult(){
+        ArrayList<Result> results = new ArrayList<>();
+        int timeLeft = IConstants.TOTAL_TIME;
+        long antsLeft = IConstants.ANTS_LEFT;
+        double previousTime = -getBestOptimal().getSet().get(0).getThrees().get(0).getX()/IConstants.ANT_MAX_SPEED;
+        outLoop:
+        while (timeLeft > 0){
+            OptimalThreeSet optimalSet = getBestOptimal();
+            for(ThreesAtSameX threesAtSameX : optimalSet.getSet()){
+                for(Three three : threesAtSameX.getThrees()){
+                    int decreaseFactor;
+                    if(three.getLeavesCount() < antsLeft){
+                        decreaseFactor = three.getLeavesCount();
+                    }else{
+                        decreaseFactor = (int)antsLeft;
+                    }
+                    antsLeft -= decreaseFactor;
+                    three.decreaseLeavesCount(decreaseFactor);
+                    double newTime = three.getX()/IConstants.ANT_MAX_SPEED;
+                    previousTime += newTime;
+                    timeLeft -= newTime;
+                    results.add(new Result(three, decreaseFactor, previousTime));
+                    if(timeLeft < 0 || antsLeft < 1){
+                        break outLoop;
+                    }
+                }
+            }
+        }
+        return results;
     }
 
 }
